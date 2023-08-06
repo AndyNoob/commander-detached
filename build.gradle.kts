@@ -1,5 +1,5 @@
 plugins {
-    id("java-library")
+    id("java")
     id("maven-publish")
 }
 
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compileOnlyApi("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
 }
 
 java {
