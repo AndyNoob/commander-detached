@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.quadraboy.commander"
-version = "0.1-BETA"
+version = "BETA-0.1"
 
 repositories {
     mavenCentral()
