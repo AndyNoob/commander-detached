@@ -3,13 +3,16 @@ package me.quadraboy.commander.structure;
 import me.quadraboy.commander.structure.handlers.ArgumentHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class Flow {
+    private final CommandSender sender;
     private final ArgumentHandler argumentHandler;
     private Component invalidArgumentMessage = Component.empty(), notAllowedMessage = Component.empty();
 
     public Flow(@NotNull final CommandSender sender, @NotNull final String[] arguments) {
+        this.sender = sender;
         this.argumentHandler = new ArgumentHandler(arguments, sender, invalidArgumentMessage);
     }
 
@@ -17,13 +20,15 @@ public class Flow {
         return this.argumentHandler;
     }
 
+    public Player player() {
+        return (Player) sender;
+    }
+
     public Component invalidArgumentMessage() {
         return this.invalidArgumentMessage;
     }
 
     public void invalidArgumentMessage(@NotNull final Component invalidArgumentMessage) {
-        if(this.invalidArgumentMessage.equals(invalidArgumentMessage)) return;
-
         this.invalidArgumentMessage = invalidArgumentMessage;
     }
 
@@ -32,8 +37,6 @@ public class Flow {
     }
 
     public void notAllowedMessage(@NotNull final Component notAllowedMessage) {
-        if(this.notAllowedMessage.equals(notAllowedMessage)) return;
-
         this.notAllowedMessage = notAllowedMessage;
     }
 }

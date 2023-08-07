@@ -2,6 +2,8 @@ package me.quadraboy.commander.structure.handlers;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 public abstract class StringHandler {
     private final String[] commandArguments;
 
@@ -10,9 +12,12 @@ public abstract class StringHandler {
     }
 
     public String getString(final int targetIndex) {
-        return (this.commandArguments.length > 0) ? this.commandArguments[targetIndex] : "";
+        return (this.commandArguments.length == targetIndex + 1) ? this.commandArguments[targetIndex] : "";
     }
 
+    public String[] getStringsAt(final int from) {
+        return (this.commandArguments.length > 0) ? Arrays.copyOfRange(commandArguments, from, commandArguments.length) : new String[0];
+    }
     public boolean compare(@NotNull final String toCompare, final int targetIndex) {
         return this.commandArguments[targetIndex].equalsIgnoreCase(toCompare);
     }
