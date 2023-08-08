@@ -1,4 +1,4 @@
-# ```commander``` 
+# ```commander```  
 [![](https://jitpack.io/v/QuadraBoy/commander.svg)](https://jitpack.io/#QuadraBoy/commander)
 
 **commander** (formerly ModernityAPI) is an easy-to-use, annotation-based, Minecraft Command API for Paper plugin developers!
@@ -9,6 +9,9 @@
 - Command Utilities: commander provides the developers a wide-range of utilities such as the **ArgumentHandler** and much more.
 - No plugin.yml Command Registration: No need to register the command in the ```plugin.yml``` because commander does it for you!
 - Null Safety: commander is designed to have null-safety.
+
+## Project Status
+As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [pull request](https://github.com/QuadraBoy/commander/pulls) section! It helps commander grow :)
 
 # Why commander?
 Let's say we make a command for players only with one argument that says hello to the player using the normal way:
@@ -147,6 +150,3 @@ dependencies {
     implementation("com.github.QuadraBoy:commander:BETA-0.1")
 }
 ```
-
-## Project Status
-As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [pull request](https://github.com/QuadraBoy/commander/pulls) section! It helps commander grow :)

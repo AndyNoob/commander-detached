@@ -26,11 +26,11 @@ public @interface Command {
     enum InitiatorType {
         PLAYER,
         CONSOLE,
-        BOTH
+        BOTH;
     }
 
     enum Status {
         SUCCESS,
-        FAILED
+        FAILED;
     }
 }

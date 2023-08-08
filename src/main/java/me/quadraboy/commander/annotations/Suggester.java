@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface Suggester {
 
     boolean sorted() default true;
+
 }

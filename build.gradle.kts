@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.quadraboy.commander"
-version = "BETA-0.2"
+version = "BETA-0.3"
 
 repositories {
     mavenCentral()
@@ -24,7 +24,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "com.github.QuadraBoy"
             artifactId = "commander"
-            version = "BETA-0.2"
+            version = "BETA-0.3"
 
             from(components["java"])
         }
