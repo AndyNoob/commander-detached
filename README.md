@@ -147,3 +147,7 @@ dependencies {
     implementation("com.github.QuadraBoy:commander:BETA-0.3")
 }
 ```
+
+# Documentation
+
+You can check the in-progress documentation in the [wiki](https://github.com/QuadraBoy/commander/wiki).
