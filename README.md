@@ -26,15 +26,12 @@ public class TestCommand implements TabExecutor {
                 if(strings.length == 1) {
                     if(strings[0].equalsIgnoreCase("hello")) {
                         commandSender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!"));
-                    } else {
-                        commandSender.sendMessage(Component.text("Invalid Argument", NamedTextColor.RED));
-                    }
+                        return true;
+                    } 
                 }
             }
-        } else {
-            commandSender.sendMessage(Component.text("You must be a player to do that!", NamedTextColor.RED));
-        }
-        return true;
+        } 
+        return false;
     }
 
     @Override
@@ -83,14 +80,14 @@ Now here's the problem, doing what all of I mentioned can sometimes be a hassle.
 public class TestCommand {
 
     @Executor(preventEmptyArgument = true)
-    public Command.Status onTest(final CommandSender sender, final Flow flow) {
-        flow.argument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
+    public Command.Status onTest(final CommandSender sender, final Structure structure) {
+        structure.argument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
         return Command.Status.SUCCESS;
     }
     
     @Suggester
-    public void onSuggest(final CommandSender sender, SuggestionHandler suggestionHandler) {
-        suggestionHandler.create(0, "hello");
+    public void onSuggest(final CommandSender sender, Suggestion suggestion) {
+        suggestion.create(0, "hello");
     }
 }
 ```
@@ -115,7 +112,7 @@ You can add commander as your project's dependency. Copy and paste the following
 <dependency>
     <groupId>com.github.QuadraBoy</groupId>
     <artifactId>commander</artifactId>
-    <version>BETA-0.1</version>
+    <version>BETA-0.3</version>
 </dependency>
 ```
 
@@ -131,7 +128,7 @@ repositories {
 ### Dependency
 ```groovy
 dependencies {
-    implementation 'com.github.QuadraBoy:commander:BETA-0.1'
+    implementation 'com.github.QuadraBoy:commander:BETA-0.3'
 }
 ```
 
@@ -147,6 +144,6 @@ repositories {
 ### Dependency
 ```kts
 dependencies {
-    implementation("com.github.QuadraBoy:commander:BETA-0.1")
+    implementation("com.github.QuadraBoy:commander:BETA-0.3")
 }
 ```
