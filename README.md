@@ -11,7 +11,7 @@
 - Null Safety: commander is designed to be null-safe.
 
 ## Project Status
-As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [pull request](https://github.com/QuadraBoy/commander/pulls) section! It helps commander grow :)
+As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [issues](https://github.com/QuadraBoy/commander/issues) section! It helps commander grow :)
 
 # Why commander?
 Let's say we make a command for players only with one argument that says hello to the player using the normal way:
