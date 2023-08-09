@@ -9,19 +9,13 @@ import me.quadraboy.commander.structure.handler.Suggestion;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandMap;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class CommandRegistry {
     private final Plugin plugin;
@@ -63,7 +57,7 @@ public class CommandRegistry {
 
                         try {
 
-                            final Command.Status status = (Command.Status) executorMethod.invoke(commandObject, sender, structure);
+                            final me.quadraboy.commander.annotations.Command.Status status = (Command.Status) executorMethod.invoke(commandObject, sender, structure);
 
                             if(status == Command.Status.FAILED) sender.sendMessage(formattedUsage);
 
@@ -82,6 +76,8 @@ public class CommandRegistry {
                 suggesterMethod.ifPresent(method -> {
                     try {
                         method.invoke(commandObject, sender, suggestion);
+
+                        if(method.getAnnotation(Suggester.class).sorted()) Collections.sort(suggestion.getCompletions());
                     } catch (Exception e) {
                         throw new CommandException("An error occurred when running the Suggester method: " + e);
                     }
@@ -95,11 +91,19 @@ public class CommandRegistry {
         if(!baseCommand.isRegistered()) commandMap.register(plugin.getName(), baseCommand);
     }
 
-    public void unregisterCommand(@NotNull final Object object) {
-        final Class<?> targetClass = object.getClass();
+    public void unregisterCommand(@NotNull final Object commandObject) {
+        final Class<?> targetClass = commandObject.getClass();
 
         final Command command = Optional.of(targetClass.getAnnotation(Command.class)).orElseThrow(() -> new CommandException("The target class (" + targetClass.getName() + ") is not a command."));
 
         if(Objects.requireNonNull(commandMap.getCommand(command.name())).isRegistered()) Objects.requireNonNull(commandMap.getCommand(command.name())).unregister(commandMap);
+    }
+
+    public void registerCommands(@NotNull final Object... commandObjects) {
+        Arrays.stream(commandObjects).forEach(this::registerCommand);
+    }
+
+    public void unregisterCommands(@NotNull final Object... commandObjects) {
+        Arrays.stream(commandObjects).forEach(this::unregisterCommand);
     }
 }
