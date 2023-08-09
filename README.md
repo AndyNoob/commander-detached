@@ -8,7 +8,7 @@
 - Easy-to-use: commander is designed to be easy-to-use for developers.
 - Command Utilities: commander provides the developers a wide-range of utilities such as the **ArgumentHandler** and much more.
 - No plugin.yml Command Registration: No need to register the command in the ```plugin.yml``` because commander does it for you!
-- Null Safety: commander is designed to have null-safety.
+- Null Safety: commander is designed to be null-safe.
 
 ## Project Status
 As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [pull request](https://github.com/QuadraBoy/commander/pulls) section! It helps commander grow :)
