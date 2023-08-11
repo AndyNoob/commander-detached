@@ -28,7 +28,9 @@ public class CommandRegistry {
     public void registerCommand(@NotNull final Object commandObject) {
         final Class<?> targetClass = commandObject.getClass();
 
-        final Command command = Optional.of(targetClass.getAnnotation(Command.class)).orElseThrow(() -> new CommandException("The target class (" + targetClass.getName() + ") is not a command."));
+        if(!targetClass.isAnnotationPresent(Command.class)) throw new CommandException("The target class (" + targetClass.getName() + ") is not a command.");
+
+        final Command command = targetClass.getAnnotation(Command.class);
 
         final Method executorMethod = Arrays.stream(targetClass.getMethods()).filter((method -> method.isAnnotationPresent(Executor.class))).findAny().orElseThrow(() -> new CommandException("The target class (" + targetClass.getName() + ") does not have an Executor method."));
         final Optional<Method> suggesterMethod = Arrays.stream(targetClass.getMethods()).filter((method -> method.isAnnotationPresent(Suggester.class))).findAny();
@@ -94,7 +96,9 @@ public class CommandRegistry {
     public void unregisterCommand(@NotNull final Object commandObject) {
         final Class<?> targetClass = commandObject.getClass();
 
-        final Command command = Optional.of(targetClass.getAnnotation(Command.class)).orElseThrow(() -> new CommandException("The target class (" + targetClass.getName() + ") is not a command."));
+        if(!targetClass.isAnnotationPresent(Command.class)) throw new CommandException("The target class (" + targetClass.getName() + ") is not a command.");
+
+        final Command command = targetClass.getAnnotation(Command.class);
 
         if(Objects.requireNonNull(commandMap.getCommand(command.name())).isRegistered()) Objects.requireNonNull(commandMap.getCommand(command.name())).unregister(commandMap);
     }
