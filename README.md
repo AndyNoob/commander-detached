@@ -10,7 +10,7 @@
 - No plugin.yml Command Registration: No need to register the command in the ```plugin.yml``` because commander does it for you!
 - Null Safety: commander is designed to be null-safe.
 
-## Project Status
+# Project Status
 As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [issues](https://github.com/QuadraBoy/commander/issues) section! It helps commander grow :)
 
 # Why commander?
