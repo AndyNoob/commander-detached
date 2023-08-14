@@ -81,7 +81,7 @@ public class TestCommand {
 
     @Executor(preventEmptyArgument = true)
     public Command.Status onTest(final CommandSender sender, final Structure structure) {
-        structure.argument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
+        structure.getArgument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
         return Command.Status.SUCCESS;
     }
     
