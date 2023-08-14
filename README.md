@@ -52,7 +52,7 @@ public final class PluginExample extends JavaPlugin {
 }
 ```
 
-...oh _and_ don't forget in **plugin.yml**.
+...and don't forget to register it in **plugin.yml**.
 
 ```yaml
 name: PluginExample
