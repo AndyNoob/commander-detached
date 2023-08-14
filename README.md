@@ -81,7 +81,7 @@ public class TestCommand {
 
     @Executor(preventEmptyArgument = true)
     public Command.Status onTest(final CommandSender sender, final Structure structure) {
-        structure.argument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
+        structure.getArgument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
         return Command.Status.SUCCESS;
     }
     
@@ -112,7 +112,7 @@ You can add commander as your project's dependency. Copy and paste the following
 <dependency>
     <groupId>com.github.QuadraBoy</groupId>
     <artifactId>commander</artifactId>
-    <version>BETA-0.4</version>
+    <version>BETA-0.5</version>
 </dependency>
 ```
 
@@ -128,7 +128,7 @@ repositories {
 ### Dependency
 ```groovy
 dependencies {
-    implementation 'com.github.QuadraBoy:commander:BETA-0.4'
+    implementation 'com.github.QuadraBoy:commander:BETA-0.5'
 }
 ```
 
@@ -144,10 +144,14 @@ repositories {
 ### Dependency
 ```kts
 dependencies {
-    implementation("com.github.QuadraBoy:commander:BETA-0.4")
+    implementation("com.github.QuadraBoy:commander:BETA-0.5")
 }
 ```
 
 # Documentation
 
 You can check the in-progress documentation in the [wiki](https://github.com/QuadraBoy/commander/wiki).
+
+# History
+
+This project is used to be a private Command API that I made for my custom plugins but, I've decided to publish it for everyone that are having troubles creating a command for their plugin.

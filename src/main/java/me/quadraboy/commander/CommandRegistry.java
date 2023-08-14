@@ -4,7 +4,7 @@ import me.quadraboy.commander.annotations.Command;
 import me.quadraboy.commander.annotations.Executor;
 import me.quadraboy.commander.annotations.Suggester;
 import me.quadraboy.commander.structure.Structure;
-import me.quadraboy.commander.structure.handler.Argument;
+import me.quadraboy.commander.structure.handler.arguments.Argument;
 import me.quadraboy.commander.structure.handler.Suggestion;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -47,10 +47,11 @@ public class CommandRegistry {
                 final MiniMessage miniMessage = MiniMessage.miniMessage();
                 final Component formattedUsage = miniMessage.deserialize(getUsage());
 
+                final Argument argument = new Argument(args);
+                final Structure structure = new Structure(sender, argument);
+
                 if(allowPlayer || allowConsole || allowBoth) {
                     if(args != null) {
-                        final Argument argument = new Argument(args);
-                        final Structure structure = new Structure(sender, argument);
 
                         if(executorMethod.getAnnotation(Executor.class).preventEmptyArgument() && args.length == 0) {
                             sender.sendMessage(formattedUsage);
@@ -59,7 +60,7 @@ public class CommandRegistry {
 
                         try {
 
-                            final me.quadraboy.commander.annotations.Command.Status status = (Command.Status) executorMethod.invoke(commandObject, sender, structure);
+                            final Command.Status status = (Command.Status) executorMethod.invoke(commandObject, sender, structure);
 
                             if(status == Command.Status.FAILED) sender.sendMessage(formattedUsage);
 
@@ -68,6 +69,8 @@ public class CommandRegistry {
                         }
                         return true;
                     }
+                } else {
+                    structure.getNotAllowedAction().run();
                 }
                 return false;
             }
