@@ -1,5 +1,6 @@
-package me.quadraboy.commander.structure.handler;
+package me.quadraboy.commander.structure.handler.arguments;
 
+import me.quadraboy.commander.structure.handler.StringHandler;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -34,6 +35,10 @@ public class Argument extends StringHandler {
 
     public void createIf(@NotNull final Supplier<Boolean> condition, @NotNull final String name, final int targetIndex, @NotNull final Runnable action) {
         createIf(condition, name, targetIndex, action, () -> {});
+    }
+
+    public <T> T parse(@NotNull final ArgumentParser<T> argumentParser, final int targetIndex) {
+        return argumentParser.parse(getString(targetIndex));
     }
 
     public Optional<Player> toPlayer(final int targetIndex) {
