@@ -112,7 +112,7 @@ You can add commander as your project's dependency. Copy and paste the following
 <dependency>
     <groupId>com.github.QuadraBoy</groupId>
     <artifactId>commander</artifactId>
-    <version>BETA-0.4</version>
+    <version>BETA-0.5</version>
 </dependency>
 ```
 
@@ -128,7 +128,7 @@ repositories {
 ### Dependency
 ```groovy
 dependencies {
-    implementation 'com.github.QuadraBoy:commander:BETA-0.4'
+    implementation 'com.github.QuadraBoy:commander:BETA-0.5'
 }
 ```
 
@@ -144,7 +144,7 @@ repositories {
 ### Dependency
 ```kts
 dependencies {
-    implementation("com.github.QuadraBoy:commander:BETA-0.4")
+    implementation("com.github.QuadraBoy:commander:BETA-0.5")
 }
 ```
 
