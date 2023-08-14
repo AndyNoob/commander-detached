@@ -151,3 +151,7 @@ dependencies {
 # Documentation
 
 You can check the in-progress documentation in the [wiki](https://github.com/QuadraBoy/commander/wiki).
+
+# History
+
+This project is used to be a private Command API that I made for my custom plugins but, I've decided to publish it for everyone that are having troubles creating a command for their plugin.
