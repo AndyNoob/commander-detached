@@ -12,7 +12,7 @@ public abstract class StringHandler {
     }
 
     public String getString(final int targetIndex) {
-        return (strings.length == targetIndex + 1) ? strings[targetIndex] : "";
+        return (targetIndex < strings.length) ? strings[targetIndex] : "";
     }
 
     public String[] getStringsFrom(final int fromIndex) {
