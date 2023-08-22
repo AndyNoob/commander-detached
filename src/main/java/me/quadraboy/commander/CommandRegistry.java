@@ -3,6 +3,7 @@ package me.quadraboy.commander;
 import me.quadraboy.commander.annotations.Command;
 import me.quadraboy.commander.annotations.Executor;
 import me.quadraboy.commander.annotations.Suggester;
+import me.quadraboy.commander.structure.ExecuteStructure;
 import me.quadraboy.commander.structure.Structure;
 import me.quadraboy.commander.structure.handler.arguments.Argument;
 import me.quadraboy.commander.structure.handler.Suggestion;
@@ -48,7 +49,7 @@ public class CommandRegistry {
                 final Component formattedUsage = miniMessage.deserialize(getUsage());
 
                 final Argument argument = new Argument(args);
-                final Structure structure = new Structure(sender, argument);
+                final ExecuteStructure executeStructure = new ExecuteStructure(sender, argument);
 
                 if(allowPlayer || allowConsole || allowBoth) {
                     if(args != null) {
@@ -60,7 +61,7 @@ public class CommandRegistry {
 
                         try {
 
-                            final Command.Status status = (Command.Status) executorMethod.invoke(commandObject, sender, structure);
+                            final Command.Status status = (Command.Status) executorMethod.invoke(commandObject, executeStructure);
 
                             if(status == Command.Status.FAILED) sender.sendMessage(formattedUsage);
 
@@ -70,7 +71,7 @@ public class CommandRegistry {
                         return true;
                     }
                 } else {
-                    structure.getNotAllowedAction().run();
+                    executeStructure.getNotAllowedAction().run();
                 }
                 return false;
             }
@@ -78,9 +79,11 @@ public class CommandRegistry {
             @Override
             public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
                 final Suggestion suggestion = new Suggestion(args);
+                final SuggestionStructure suggestionStructure = new SuggestionStructure(sender, suggestion);
+
                 suggesterMethod.ifPresent(method -> {
                     try {
-                        method.invoke(commandObject, sender, suggestion);
+                        method.invoke(commandObject, suggestionStructure);
 
                         if(method.getAnnotation(Suggester.class).sorted()) Collections.sort(suggestion.getCompletions());
                     } catch (Exception e) {

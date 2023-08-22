@@ -1,5 +1,6 @@
 package me.quadraboy.commander.structure.handler;
 
+import me.quadraboy.commander.structure.handler.StringHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
