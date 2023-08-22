@@ -84,20 +84,20 @@ Well, with commander, commands are as simple as this:
         aliases = {"foo", "bar"})
 public class TestCommand {
 
-    // The name of the methods don't not matter, all that matters is the 2 annotations.
+    // The name of the methods don't matter, all that matters is the 2 annotations.
 
     @Executor(preventEmptyArgument = true)
-    public Command.Status onTest(final CommandSender sender, final Structure structure) {
+    public Command.Status onTest(final ExecuteStructure structure) {
         structure.getArgument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello <arg>!", Placeholder.unparsed("arg", structure.getArgument().getString(1)))));
         return Command.Status.SUCCESS;
     }
     
     @Suggester
-    public void onSuggest(final CommandSender sender, Suggestion suggestion) {
+    public void onSuggest(final SuggestionStructure structure) {
         // This method is invoked by commander every time Bukkit requests a tab completion list
         // Or, to put it more simply, every time the player types a character in command.
-        suggestion.create(0, "hello");
-        suggestion.createIf(() -> suggestion.compare(1, "hello"), 1, Bukkit.getOnlinePlayers().stream().map(Player::getName).toArray(String[]::new));
+        structure.getSuggestion().create(0, "hello");
+        structure.getSuggestion().createIf(() -> suggestion.compare(1, "hello"), 1, Bukkit.getOnlinePlayers().stream().map(Player::getName).toArray(String[]::new));
     }
 }
 ```
