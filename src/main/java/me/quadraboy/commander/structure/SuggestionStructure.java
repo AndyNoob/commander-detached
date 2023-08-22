@@ -1,4 +1,4 @@
-package me.quadraboy.commander;
+package me.quadraboy.commander.structure;
 
 import me.quadraboy.commander.structure.Structure;
 import me.quadraboy.commander.structure.handler.Suggestion;

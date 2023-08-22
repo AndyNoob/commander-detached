@@ -4,7 +4,7 @@ import me.quadraboy.commander.annotations.Command;
 import me.quadraboy.commander.annotations.Executor;
 import me.quadraboy.commander.annotations.Suggester;
 import me.quadraboy.commander.structure.ExecuteStructure;
-import me.quadraboy.commander.structure.Structure;
+import me.quadraboy.commander.structure.SuggestionStructure;
 import me.quadraboy.commander.structure.handler.arguments.Argument;
 import me.quadraboy.commander.structure.handler.Suggestion;
 import net.kyori.adventure.text.Component;
