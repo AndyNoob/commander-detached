@@ -14,6 +14,7 @@
 As of now, commander is still in **BETA** due to being an early project and still needs some improving. Feel free to report a bug or issue at the [issues](https://github.com/QuadraBoy/commander/issues) section! It helps commander grow :)
 
 # Why commander?
+### _With normal bukkit/spigot_
 Let's say we make a command for players only with one argument that says hello to the player using the normal way:
 
 ```java
@@ -40,17 +41,18 @@ public class TestCommand implements TabExecutor {
     }
 }
 ```
-Then, we need to register it in the **JavaPlugin** class and **plugin.yml**.
+Then, we need to register it in the **JavaPlugin** class...
 
 ```java
 public final class PluginExample extends JavaPlugin {
-
     @Override
     public void onEnable() {
         getCommand("test").setExecutor(new TestCommand());
     }
 }
 ```
+
+...and don't forget to register it in **plugin.yml**.
 
 ```yaml
 name: PluginExample
@@ -68,7 +70,10 @@ commands:
       - bar
 ```
 
-Now here's the problem, doing what all of I mentioned can sometimes be a hassle. With commander, you can just do this:
+As you may see, this is quite a hassle.
+
+### _With commander_
+Well, with commander, commands are as simple as this:
 
 ```java
 @Command(name = "test",
@@ -79,20 +84,40 @@ Now here's the problem, doing what all of I mentioned can sometimes be a hassle.
         aliases = {"foo", "bar"})
 public class TestCommand {
 
+    // The name of the methods don't not matter, all that matters is the 2 annotations.
+
     @Executor(preventEmptyArgument = true)
     public Command.Status onTest(final CommandSender sender, final Structure structure) {
-        structure.getArgument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello World!")));
+        structure.getArgument().create("hello", 0, () -> sender.sendMessage(MiniMessage.miniMessage().deserialize("<rainbow>Hello <arg>!", Placeholder.unparsed("arg", structure.getArgument().getString(1)))));
         return Command.Status.SUCCESS;
     }
     
     @Suggester
     public void onSuggest(final CommandSender sender, Suggestion suggestion) {
+        // This method is invoked by commander every time Bukkit requests a tab completion list
+        // Or, to put it more simply, every time the player types a character in command.
         suggestion.create(0, "hello");
+        suggestion.createIf(() -> suggestion.compare(1, "hello"), 1, Bukkit.getOnlinePlayers().stream().map(Player::getName).toArray(String[]::new));
+    }
+}
+```
+Well, unfortunately, you'd still need to register the command. But worry not, you only have to do it **once** (continues trash talking Bukkit)!
+
+```java
+import me.quadraboy.commander.CommandRegistry;
+
+public final class PluginExample extends JavaPlugin {
+    @Override
+    public void onEnable() {
+        final CommandRegistry registry = new CommandRegistry(this);
+        registry.registerCommand(new TestCommand());
     }
 }
 ```
 
 With commander, the code becomes much cleaner and more manageable. That's not all, commander can convert those arguments into numerous data types (e.g., Player, Integer, Double, Material, Entity, etc.)
+
+---
 
 # Using commander in your projects
 You can add commander as your project's dependency. Copy and paste the following that corresponds to your build system.
