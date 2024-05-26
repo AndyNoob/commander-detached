@@ -66,7 +66,7 @@ public class CommandRegistry {
                             if(status == Command.Status.FAILED) sender.sendMessage(formattedUsage);
 
                         } catch (Exception e) {
-                            throw new CommandException("An error occurred when running the Executor method: " + e);
+                            throw new CommandException("An error occurred when running the Executor method", e);
                         }
                         return true;
                     }
@@ -87,7 +87,7 @@ public class CommandRegistry {
 
                         if(method.getAnnotation(Suggester.class).sorted()) Collections.sort(suggestion.getCompletions());
                     } catch (Exception e) {
-                        throw new CommandException("An error occurred when running the Suggester method: " + e);
+                        throw new CommandException("An error occurred when running the Suggester method", e);
                     }
                 });
                 return suggestion.getCompletions();
